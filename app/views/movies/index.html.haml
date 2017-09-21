@@ -1,12 +1,27 @@
 -#  This file is app/views/movies/index.html.haml
 %h1 All Movies
-
 %table#movies
   %thead
     %tr
-      %th= link_to "Movie Title", new_movie_path
+      - if params[:count1] == "1"
+        %th{:class => "hilite"}
+          = link_to "Movie Title", movies_path({count1:2, header:"title"})
+      - else
+        %th
+          = link_to "Movie Title", movies_path({count1:1, header:"title"})
+          
+        
       %th Rating
-      %th= link_to 'Release Date', new_movie_path
+      
+      
+      - if params[:count2] == "1"
+        %th{:class => "hilite"}
+          = link_to "Release Date", movies_path({count2:2, header:"release_date"})
+      - else
+        %th
+          = link_to "Release Date", movies_path({count2:1, header:"release_date"})
+
+
       %th More Info
   %tbody
     - @movies.each do |movie|

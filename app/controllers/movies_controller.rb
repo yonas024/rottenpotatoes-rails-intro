@@ -11,7 +11,11 @@ class MoviesController < ApplicationController
   end
 
   def index
-    @movies = Movie.all
+    if params["header"] != nil
+      @movies = Movie.order(params["header"])
+    else
+      @movies = Movie.all
+    end
   end
 
   def new
