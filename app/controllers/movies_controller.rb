@@ -16,6 +16,33 @@ class MoviesController < ApplicationController
     else
       @movies = Movie.all
     end
+    
+    @all_ratings = Movie.get_ratings
+    @movies = ovie
+  end
+  
+  def ovie
+    string = ""
+    count = 0
+    ratings = params["ratings"]
+    if ratings == nil
+      return @movies
+    else
+      ratings = ratings.keys
+    end
+      
+    for r in ratings
+      if count == 0
+        string = string + "rating = " + "'" + r + "'"
+        count= count + 1
+      else
+        string = string + " or rating = " + "'" + r + "'"
+      end
+    end
+    
+    
+    return Movie.where(string)
+
   end
 
   def new
